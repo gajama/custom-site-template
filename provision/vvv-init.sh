@@ -197,7 +197,15 @@ cr__install_gulp_global() {
 
 cr__copy_site_composer() {
   " * Copying composer.json from server"
-  scp tcr@tcr.webfactional.com:webapps/cr_org/composer.json "${vvv_PATH_TO_SITE}/public_html/"
+  GITLAB_API_URL=https://gitlab.com/api/v4
+  GITLAB_TOKEN=MUzSgoBySL-GnkZBSEZ8
+  PROJECT=carersresource/cr-site
+  FILE=composer.json
+
+  PROJECT_ENC=$(echo -n ${PROJECT} | jq -sRr @uri)
+  FILE_ENC=$(echo -n ${FILE} | jq -sRr @uri)
+
+  curl --header "PRIVATE-TOKEN: ${GITLAB_TOKEN}" "${GITLAB_API_URL}/projects/${PROJECT_ENC}/repository/files/${FILE_ENC}/raw?ref=v2" >> composer.json
 }
 
 cr__run_site_composer() {
@@ -248,6 +256,6 @@ copy_nginx_configs
 setup_wp_config_constants
 install_plugins
 install_themes
-install_gulp_global
+cr__install_gulp_global
 
 echo " * Site Template provisioner script completed for ${VVV_SITE_NAME}"
