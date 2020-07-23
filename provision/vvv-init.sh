@@ -41,6 +41,11 @@ install_plugins() {
         noroot wp plugin install "${plugin}" --activate
     done
   fi
+  echo " * Activating Gravity Forms"
+  noroot wp plugin activate gravityforms
+  echo " * Activating Gravity Forms Mailchimp plugin"
+  noroot wp plugin activate gravityformsmailchimp
+
 }
 
 install_themes() {
@@ -183,6 +188,28 @@ update_wp() {
   fi
 }
 
+cr__install_gulp_global() {
+  " * Remove Gulp if installed"
+  npm remove -g gulp
+  " * Installing Gulp CLI globally"
+  npm install -g gulp-cli
+}
+
+cr__copy_site_composer() {
+  " * Copying composer.json from server"
+  scp tcr@tcr.webfactional.com:webapps/cr_org/composer.json "${vvv_PATH_TO_SITE}/public_html/"
+}
+
+cr__run_site_composer() {
+  cd "${VVV_PATH_TO_SITE}/public_html"
+  composer install
+  composer update
+}
+
+cr__theme_npm_install() {
+  npm install --include-dev --prefix wp-content/themes/carersresource
+}
+
 setup_database
 setup_nginx_folders
 
@@ -221,5 +248,6 @@ copy_nginx_configs
 setup_wp_config_constants
 install_plugins
 install_themes
+install_gulp_global
 
 echo " * Site Template provisioner script completed for ${VVV_SITE_NAME}"
