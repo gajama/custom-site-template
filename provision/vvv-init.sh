@@ -196,7 +196,7 @@ cr__install_gulp_global() {
 }
 
 cr__copy_site_composer() {
-  " * Copying composer.json from server"
+  echo " * Copying composer.json from server"
   GITLAB_API_URL=https://gitlab.com/api/v4
   GITLAB_TOKEN=MUzSgoBySL-GnkZBSEZ8
   PROJECT=carersresource/cr-site
