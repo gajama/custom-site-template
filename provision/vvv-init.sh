@@ -190,9 +190,9 @@ update_wp() {
 
 cr__install_gulp_global() {
   " * Remove Gulp if installed"
-  npm remove -g gulp
+  npm_config_loglevel=error npm remove -g gulp
   " * Installing Gulp CLI globally"
-  npm install -g gulp-cli
+  npm_config_loglevel=error npm install -g gulp-cli
 }
 
 cr__copy_site_composer() {
@@ -205,17 +205,17 @@ cr__copy_site_composer() {
   PROJECT_ENC=$(echo -n ${PROJECT} | jq -sRr @uri)
   FILE_ENC=$(echo -n ${FILE} | jq -sRr @uri)
 
-  curl --header "PRIVATE-TOKEN: ${GITLAB_TOKEN}" "${GITLAB_API_URL}/projects/${PROJECT_ENC}/repository/files/${FILE_ENC}/raw?ref=v2" >> composer.json
+  curl --header "PRIVATE-TOKEN: ${GITLAB_TOKEN}" "${GITLAB_API_URL}/projects/${PROJECT_ENC}/repository/files/${FILE_ENC}/raw?ref=v2" > composer.json
 }
 
 cr__run_site_composer() {
   cd "${VVV_PATH_TO_SITE}/public_html"
-  composer install
-  composer update
+  noroot composer install
+  noroot composer update
 }
 
 cr__theme_npm_install() {
-  npm install --include-dev --prefix wp-content/themes/carersresource
+  npm_config_loglevel=error npm install --include-dev --prefix wp-content/themes/carersresource
 }
 
 setup_database
@@ -254,8 +254,8 @@ fi
 
 copy_nginx_configs
 setup_wp_config_constants
-install_plugins
-install_themes
+#install_plugins
+#install_themes
 cr__install_gulp_global
 cr__copy_site_composer
 cr__run_site_composer
