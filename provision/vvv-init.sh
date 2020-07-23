@@ -188,13 +188,6 @@ update_wp() {
   fi
 }
 
-cr__install_gulp_global() {
-  echo " * Remove Gulp if installed"
-  npm_config_loglevel=error npm remove -g gulp
-  echo " * Installing Gulp CLI globally"
-  npm_config_loglevel=error npm install -g gulp-cli
-}
-
 cr__copy_site_composer() {
   echo " * Copying composer.json from server"
   GITLAB_API_URL=https://gitlab.com/api/v4
@@ -257,7 +250,6 @@ copy_nginx_configs
 setup_wp_config_constants
 #install_plugins
 #install_themes
-cr__install_gulp_global
 cr__copy_site_composer
 cr__run_site_composer
 cr__theme_npm_install
