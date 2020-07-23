@@ -201,7 +201,7 @@ cr__copy_site_composer() {
   GITLAB_TOKEN=MUzSgoBySL-GnkZBSEZ8
   PROJECT=carersresource/cr-site
   FILE=composer.json
-  apt-get install jq
+  apt-get install -y jq
 
   PROJECT_ENC=$(echo -n ${PROJECT} | jq -sRr @uri)
   FILE_ENC=$(echo -n ${FILE} | jq -sRr @uri)
