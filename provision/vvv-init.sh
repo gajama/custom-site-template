@@ -257,5 +257,8 @@ setup_wp_config_constants
 install_plugins
 install_themes
 cr__install_gulp_global
+cr__copy_site_composer
+cr__run_site_composer
+cr__theme_npm_install
 
 echo " * Site Template provisioner script completed for ${VVV_SITE_NAME}"
