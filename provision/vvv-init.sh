@@ -189,9 +189,9 @@ update_wp() {
 }
 
 cr__install_gulp_global() {
-  " * Remove Gulp if installed"
+  echo " * Remove Gulp if installed"
   npm_config_loglevel=error npm remove -g gulp
-  " * Installing Gulp CLI globally"
+  echo " * Installing Gulp CLI globally"
   npm_config_loglevel=error npm install -g gulp-cli
 }
 
