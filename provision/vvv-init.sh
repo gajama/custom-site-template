@@ -241,11 +241,12 @@ cr__get_plugins() {
 }
 
 cr__theme_npm_install() {
+  echo " * install theme npm modules"
   npm_config_loglevel=error npm install --include-dev --prefix wp-content/themes/carersresource
 }
 
 cr__generate_theme_css() {
-  gulp less
+  gulp --cwd wp-content/themes/carersresource less
 }
 
 cr__get_site_db() {
