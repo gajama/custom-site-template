@@ -235,6 +235,7 @@ cr__get_plugins() {
     git add .
     git stash
     git pull
+    echo "Here."
     cd "${VVV_PATH_TO_SITE}/public_html"
     echo " ...done."
   fi
