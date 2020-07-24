@@ -254,6 +254,7 @@ cr__get_site_db() {
     scp tcr@tcr.webfactional.com:db-backups/cr-prod-latest "${VVV_PATH_TO_SITE}"
     noroot wp db import ../cr-prod-latest
     noroot wp search-replace https://www.carersresource.org http://cr-local.test
+  fi
 }
 
 setup_database
