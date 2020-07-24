@@ -213,6 +213,7 @@ cr__get_theme() {
   else
     echo " * Update Carers' Resource theme repository"
     cd ${CR_THEME_FOLDER}
+    git checkout v2
     git add .
     git stash
     git pull
@@ -231,10 +232,11 @@ cr__get_plugins() {
   else
     echo " * Update Carers' Resource custom plugins repository"
     cd ${CR_PLUGIN_FOLDER}
+    git checkout v2
     git add .
     git stash
     git pull
-    git stash pop &> /dev/null
+    git stash pop
     cd "${VVV_PATH_TO_SITE}/public_html"
     echo " ...done."
   fi
