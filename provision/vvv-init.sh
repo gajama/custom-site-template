@@ -249,7 +249,7 @@ cr__theme_npm_install() {
 }
 
 cr__get_site_db() {
-  if [ !-f .db ] ; then
+  if [ ! -f .db ] ; then
     ssh tcr@tcr.webfactional.com:scripts -c ./latest-db-backup.sh
     scp tcr@tcr.webfactional.com:db-backups/cr-prod-latest "${VVV_PATH_TO_SITE}"
     noroot wp db import ../cr-prod-latest
