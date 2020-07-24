@@ -89,7 +89,7 @@ END_HEREDOC
   fi
 }
 
-setup_wp_config_constants(){
+setup_wp_config_constants() {
   set +e
   shyaml get-values-0 -q "sites.${VVV_SITE_NAME}.custom.wpconfig_constants" < "${VVV_CONFIG}" |
   while IFS='' read -r -d '' key &&
