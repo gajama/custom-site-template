@@ -41,11 +41,6 @@ install_plugins() {
         noroot wp plugin install "${plugin}" --activate
     done
   fi
-  echo " * Activating Gravity Forms"
-  noroot wp plugin activate gravityforms
-  echo " * Activating Gravity Forms Mailchimp plugin"
-  noroot wp plugin activate gravityformsmailchimp
-
 }
 
 install_themes() {
@@ -156,6 +151,7 @@ install_wp() {
   fi
 
   DELETE_DEFAULT_PLUGINS=$(get_config_value 'delete_default_plugins' '')
+  echo " *** Do we get to here? ***"
   if [ ! -z "${DELETE_DEFAULT_PLUGINS}" ]; then
     echo " * Deleting the default plugins akismet and hello dolly"
     noroot wp plugin delete akismet
@@ -250,7 +246,7 @@ cr__theme_npm_install() {
 
 cr__get_site_db() {
   if [ ! -f .db ] ; then
-    ssh tcr@tcr.webfactional.com:scripts -c ./latest-db-backup.sh
+    ssh tcr@tcr.webfactional.com scripts/latest-db-backup.sh
     scp tcr@tcr.webfactional.com:db-backups/cr-prod-latest "${VVV_PATH_TO_SITE}"
     noroot wp db import ../cr-prod-latest
     noroot wp search-replace https://www.carersresource.org http://cr-local.test
