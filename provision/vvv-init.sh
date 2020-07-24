@@ -210,13 +210,13 @@ cr__run_site_composer() {
 
 cr__get_theme() {
   CR_THEME_FOLDER=wp-content/themes/carersresource
-  if [ ! -d "$CR_THEME_FOLDER" ] ; then
+  if [ ! -d "${CR_THEME_FOLDER}" ] ; then
     echo " * Clone Carers' Resource theme repository"
-    git clone git@gitlab.com:carersresource/cr-theme $CR_THEME_FOLDER
+    git clone git@gitlab.com:carersresource/cr-theme "${CR_THEME_FOLDER}"
     echo " ...done."
   else
     echo " * Update Carers' Resource theme repository"
-    cd $CR_THEME_FOLDER
+    cd ${CR_THEME_FOLDER}
     git add .
     git stash
     git pull origin v2
@@ -228,13 +228,13 @@ cr__get_theme() {
 
 cr__get_plugins() {
   CR_PLUGIN_FOLDER=wp-content/plugins/cr-plugins
-  if [ ! -d "$CR_PLUGIN_FOLDER" ] ; then
+  if [ ! -d "${CR_PLUGIN_FOLDER}" ] ; then
     echo " * Clone Carers' Resource custom plugins repository"
-    git clone git@gitlab.com:carersresource/cr-plugins $CR_PLUGIN_FOLDER
+    git clone git@gitlab.com:carersresource/cr-plugins ${CR_PLUGIN_FOLDER}
     echo " ...done."
   else
     echo " * Update Carers' Resource custom plugins repository"
-    cd $CR_PLUGIN_FOLDER
+    cd ${CR_PLUGIN_FOLDER}
     git add .
     git stash
     git pull origin v2
