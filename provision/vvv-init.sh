@@ -244,6 +244,10 @@ cr__theme_npm_install() {
   npm_config_loglevel=error npm install --include-dev --prefix wp-content/themes/carersresource
 }
 
+cr__generate_theme_css() {
+  gulp less
+}
+
 cr__get_site_db() {
   if [ ! -f .db ] ; then
     ssh tcr@tcr.webfactional.com scripts/latest-db-backup.sh
