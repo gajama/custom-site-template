@@ -300,6 +300,7 @@ cr__get_theme
 cr__copy_site_composer
 cr__run_site_composer
 cr__theme_npm_install
+cr__generate_theme_css
 cr__get_site_db
 
 echo " * Site Template provisioner script completed for ${VVV_SITE_NAME}"
