@@ -208,7 +208,7 @@ cr__get_theme() {
   CR_THEME_FOLDER=wp-content/themes/carersresource
   if [ ! -d "${CR_THEME_FOLDER}" ] ; then
     echo " * Clone Carers' Resource theme repository"
-    git clone git@gitlab.com:carersresource/cr-theme.git --branch v2 "${CR_THEME_FOLDER}"
+    norrot git clone git@gitlab.com:carersresource/cr-theme.git --branch v2 "${CR_THEME_FOLDER}"
     echo " ...done."
   else
     echo " * Update Carers' Resource theme repository"
@@ -216,7 +216,7 @@ cr__get_theme() {
     git checkout v2
     git add .
     git stash
-    git pull
+    noroot git pull
     cd "${VVV_PATH_TO_SITE}/public_html"
     echo " ...done." 
   fi
@@ -226,7 +226,7 @@ cr__get_plugins() {
   CR_PLUGIN_FOLDER=wp-content/plugins/cr-plugins
   if [ ! -d "${CR_PLUGIN_FOLDER}" ] ; then
     echo " * Clone Carers' Resource custom plugins repository"
-    git clone git@gitlab.com:carersresource/cr-plugins.git --branch v2 ${CR_PLUGIN_FOLDER}
+    noroot git clone git@gitlab.com:carersresource/cr-plugins.git --branch v2 ${CR_PLUGIN_FOLDER}
     echo " ...done."
   else
     echo " * Update Carers' Resource custom plugins repository"
@@ -234,7 +234,7 @@ cr__get_plugins() {
     git checkout v2
     git add .
     git stash
-    git pull
+    noroot git pull
     echo "Here."
     cd "${VVV_PATH_TO_SITE}/public_html"
     echo " ...done."
