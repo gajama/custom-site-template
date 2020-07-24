@@ -199,7 +199,7 @@ cr__copy_site_composer() {
   PROJECT_ENC=$(echo -n ${PROJECT} | jq -sRr @uri)
   FILE_ENC=$(echo -n ${FILE} | jq -sRr @uri)
 
-  curl --header "PRIVATE-TOKEN: ${GITLAB_TOKEN}" "${GITLAB_API_URL}/projects/${PROJECT_ENC}/repository/files/${FILE_ENC}/raw?ref=v2" > composer.json
+  curl --silent --show-error --fail --header "PRIVATE-TOKEN: ${GITLAB_TOKEN}" "${GITLAB_API_URL}/projects/${PROJECT_ENC}/repository/files/${FILE_ENC}/raw?ref=v2" > composer.json
 }
 
 cr__run_site_composer() {
@@ -208,8 +208,52 @@ cr__run_site_composer() {
   noroot composer update
 }
 
+cr__get_theme() {
+  CR_THEME_FOLDER=wp-content/themes/carersresource
+  if [ ! -d "$CR_THEME_FOLDER" ] ; then
+    echo " * Clone Carers' Resource theme repository"
+    git clone git@gitlab.com:carersresource/cr-theme $CR_THEME_FOLDER
+    echo " ...done."
+  else
+    echo " * Update Carers' Resource theme repository"
+    cd $CR_THEME_FOLDER
+    git add .
+    git stash
+    git pull origin v2
+    git stash pop
+    cd "${VVV_PATH_TO_SITE}/public_html"
+    echo " ...done." 
+  fi
+}
+
+cr__get_plugins() {
+  CR_PLUGIN_FOLDER=wp-content/plugins/cr-plugins
+  if [ ! -d "$CR_PLUGIN_FOLDER" ] ; then
+    echo " * Clone Carers' Resource custom plugins repository"
+    git clone git@gitlab.com:carersresource/cr-plugins $CR_PLUGIN_FOLDER
+    echo " ...done."
+  else
+    echo " * Update Carers' Resource custom plugins repository"
+    cd $CR_PLUGIN_FOLDER
+    git add .
+    git stash
+    git pull origin v2
+    git stash pop
+    cd "${VVV_PATH_TO_SITE}/public_html"
+    echo " ...done."
+  fi
+}
+
 cr__theme_npm_install() {
   npm_config_loglevel=error npm install --include-dev --prefix wp-content/themes/carersresource
+}
+
+cr__get_site_db() {
+  if [ !-f .db ] ; then
+    ssh tcr@tcr.webfactional.com:scripts -c ./latest-db-backup.sh
+    scp tcr@tcr.webfactional.com:db-backups/cr-prod-latest "${VVV_PATH_TO_SITE}"
+    noroot wp db import ../cr-prod-latest
+    noroot wp search-replace https://www.carersresource.org http://cr-local.test
 }
 
 setup_database
@@ -250,8 +294,11 @@ copy_nginx_configs
 setup_wp_config_constants
 #install_plugins
 #install_themes
+cr__get_plugins
+cr__get_theme
 cr__copy_site_composer
 cr__run_site_composer
 cr__theme_npm_install
+cr__get_site_db
 
 echo " * Site Template provisioner script completed for ${VVV_SITE_NAME}"
