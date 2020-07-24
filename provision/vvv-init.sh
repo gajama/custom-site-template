@@ -247,15 +247,24 @@ cr__theme_npm_install() {
 }
 
 cr__generate_theme_css() {
+  echo " * Generate css"
   gulp --cwd wp-content/themes/carersresource less
 }
 
 cr__get_site_db() {
+  echo " * Get production database"
   if [ ! -f .db ] ; then
-    ssh tcr@tcr.webfactional.com scripts/latest-db-backup.sh
-    scp tcr@tcr.webfactional.com:db-backups/cr-prod-latest "${VVV_PATH_TO_SITE}"
+    echo " ... create database backups on web server"
+    ssh -A tcr@tcr.webfactional.com scripts/latest-db-backup.sh
+    echo " ... copy database backup to local"
+    scp tcr@tcr.webfactional.com:db-backups/cr-prod-latest.sql "${VVV_PATH_TO_SITE}"
+    echo " ... import database"
     noroot wp db import ../cr-prod-latest
+    echo " ... change URLs"
     noroot wp search-replace https://www.carersresource.org http://cr-local.test
+    echo " ... create file .db to stop datbase being overwritten next provision"
+    touch .db
+    echp " ... remove file .db from public_html folder to re-import the database"
   fi
 }
 
