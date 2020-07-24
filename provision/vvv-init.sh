@@ -216,7 +216,7 @@ cr__get_theme() {
     git add .
     git stash
     git pull origin v2
-    git stash pop
+    git stash pop &> /dev/null
     cd "${VVV_PATH_TO_SITE}/public_html"
     echo " ...done." 
   fi
@@ -234,7 +234,7 @@ cr__get_plugins() {
     git add .
     git stash
     git pull origin v2
-    git stash pop
+    git stash pop &> /dev/null
     cd "${VVV_PATH_TO_SITE}/public_html"
     echo " ...done."
   fi
