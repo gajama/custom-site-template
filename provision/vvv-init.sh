@@ -278,7 +278,12 @@ cr__get_site_db() {
 }
 
 cr__get_gravity_forms() {
-
+  CR_PLUGIN_FOLDER=wp-content/plugins/cr-plugins
+  echo " * Copying Gravity Forms from production server."
+  scp -r tcr@tcr.webfactional.com:webapps/cr_org/wp-content/plugins/gravityforms "${CR_PLUGIN_FOLDER}/"
+  echo " * Copying Gravity Forms Mailchimp plugin from production server."
+  scp -r tcr@tcr.webfactional.com:webapps/cr_org/wp-content/plugins/gravityformsmailchimp "${CR_PLUGIN_FOLDER}/"
+  " Done."
 }
 
 setup_database
@@ -317,7 +322,7 @@ fi
 
 copy_nginx_configs
 setup_wp_config_constants
-#install_plugins
+install_plugins
 #install_themes
 cr__get_webserver_host_keys
 cr__get_plugins
