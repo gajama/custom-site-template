@@ -265,7 +265,7 @@ cr__get_site_db() {
     echo " ... copy database backup to local"
     scp tcr@tcr.webfactional.com:db-backups/cr-prod-latest.sql "${VVV_PATH_TO_SITE}"
     echo " ... import database"
-    noroot wp db import ../cr-prod-latest
+    noroot wp db import ../cr-prod-latest.sql
     echo " ... change URLs"
     noroot wp search-replace https://www.carersresource.org http://cr-local.test
     echo " ... create file .db to stop datbase being overwritten next provision"
