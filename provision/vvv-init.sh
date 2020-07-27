@@ -208,7 +208,7 @@ cr__get_theme() {
   CR_THEME_FOLDER=wp-content/themes/carersresource
   if [ ! -d "${CR_THEME_FOLDER}" ] ; then
     echo " * Clone Carers' Resource theme repository"
-    norrot git clone git@gitlab.com:carersresource/cr-theme.git --branch v2 "${CR_THEME_FOLDER}"
+    noroot git clone git@gitlab.com:carersresource/cr-theme.git --branch v2 "${CR_THEME_FOLDER}"
     echo " ...done."
   else
     echo " * Update Carers' Resource theme repository"
