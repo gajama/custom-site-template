@@ -270,7 +270,7 @@ cr__get_site_db() {
     noroot wp search-replace https://www.carersresource.org http://cr-local.test
     echo " ... create file .db to stop datbase being overwritten next provision"
     touch .db
-    echp " ... remove file .db from public_html folder to re-import the database"
+    echo " ... remove file .db from public_html folder to re-import the database"
   fi
 }
 
