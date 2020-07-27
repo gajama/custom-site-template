@@ -328,6 +328,7 @@ install_plugins
 #install_themes
 cr__get_webserver_host_keys
 cr__get_plugins
+cr__get_gravity_forms
 cr__get_theme
 cr__copy_site_composer
 cr__run_site_composer
