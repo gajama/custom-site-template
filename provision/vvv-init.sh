@@ -251,6 +251,12 @@ cr__generate_theme_css() {
   gulp --cwd wp-content/themes/carersresource less
 }
 
+cr__get_webserver_host_keys() {
+  #This stops host key authentication failures
+  echo " * Adding host keys for webserver to known_hosts"
+  ssh-keyscan -H tcr.webfactional.com >> "${HOME}/.ssh/known_hosts"
+}
+
 cr__get_site_db() {
   echo " * Get production database"
   if [ ! -f .db ] ; then
@@ -306,6 +312,7 @@ copy_nginx_configs
 setup_wp_config_constants
 #install_plugins
 #install_themes
+cr__get_webserver_host_keys
 cr__get_plugins
 cr__get_theme
 cr__copy_site_composer
