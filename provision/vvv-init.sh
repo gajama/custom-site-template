@@ -271,7 +271,14 @@ cr__get_site_db() {
     echo " ... create file .db to stop datbase being overwritten next provision"
     touch .db
     echo " ... remove file .db from public_html folder to re-import the database"
+  else
+    echo " * Skipping dtatbase sync .db file present in web root."
+    echo " * To sync with the production database remove the .db file and reprovision."
   fi
+}
+
+cr__get_gravity_forms() {
+
 }
 
 setup_database
