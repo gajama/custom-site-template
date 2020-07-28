@@ -288,6 +288,11 @@ cr__get_gravity_forms() {
   " Done."
 }
 
+cr__remove_default_plugins() {
+  noroot wp plugin uninstall akismet
+  noroot wp plugin uninstall hello
+}
+
 setup_database
 setup_nginx_folders
 
