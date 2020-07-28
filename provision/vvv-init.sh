@@ -278,11 +278,11 @@ cr__get_site_db() {
 }
 
 cr__get_gravity_forms() {
-  CR_PLUGIN_FOLDER=wp-content/plugins/cr-plugins
+  PLUGIN_FOLDER=wp-content/plugins
   echo " * Copying Gravity Forms from production server."
-  scp -r tcr@tcr.webfactional.com:webapps/cr_org/wp-content/plugins/gravityforms "${CR_PLUGIN_FOLDER}/"
+  scp -r tcr@tcr.webfactional.com:webapps/cr_org/wp-content/plugins/gravityforms "${PLUGIN_FOLDER}/"
   echo " * Copying Gravity Forms Mailchimp plugin from production server."
-  scp -r tcr@tcr.webfactional.com:webapps/cr_org/wp-content/plugins/gravityformsmailchimp "${CR_PLUGIN_FOLDER}/"
+  scp -r tcr@tcr.webfactional.com:webapps/cr_org/wp-content/plugins/gravityformsmailchimp "${PLUGIN_FOLDER}/"
   noroot wp plugin activate gravityforms
   noroot wp pluign activate gravityformsmailchimp
   " Done."
