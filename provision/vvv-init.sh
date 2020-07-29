@@ -285,7 +285,7 @@ cr__get_gravity_forms() {
   scp -r tcr@tcr.webfactional.com:webapps/cr_org/wp-content/plugins/gravityformsmailchimp "${PLUGIN_FOLDER}/"
   noroot wp plugin activate gravityforms
   noroot wp plugin activate gravityformsmailchimp
-  " Done."
+  echo "Done."
 }
 
 cr__remove_default_plugins() {
