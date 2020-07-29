@@ -284,7 +284,7 @@ cr__get_gravity_forms() {
   echo " * Copying Gravity Forms Mailchimp plugin from production server."
   scp -r tcr@tcr.webfactional.com:webapps/cr_org/wp-content/plugins/gravityformsmailchimp "${PLUGIN_FOLDER}/"
   noroot wp plugin activate gravityforms
-  noroot wp pluign activate gravityformsmailchimp
+  noroot wp plugin activate gravityformsmailchimp
   " Done."
 }
 
